@@ -12,6 +12,9 @@ public class MovementControl : MonoBehaviour
     float h;
     float v;
 
+    Vector3 Forward;
+    Vector3 Right;
+
     Vector3 movDir;
 
     // Start is called before the first frame update
@@ -23,6 +26,9 @@ public class MovementControl : MonoBehaviour
         h = 0f;
         v = 0f;
 
+        Forward = Vector3.zero;
+        Right = Vector3.zero;
+
         movDir = Vector3.zero;
     }
 
@@ -33,8 +39,10 @@ public class MovementControl : MonoBehaviour
         v = Input.GetAxis("Vertical");
 
         // movDir 결정하기
-
-        movDir = (Vector3.forward * v) + (Vector3.right * h);
+        float theta = transform.rotation.y * Mathf.PI;
+        Forward = new Vector3(Mathf.Sin(theta), 0f, Mathf.Cos(theta));
+        Right = new Vector3(Mathf.Cos(theta), 0f, -Mathf.Sin(theta));
+        movDir = (Forward * v) + (Right * h);
 
         if (Input.GetKey("w") || Input.GetKey("s") || Input.GetKey("a") || Input.GetKey("d"))
         {
