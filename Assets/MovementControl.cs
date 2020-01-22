@@ -75,7 +75,7 @@ public class MovementControl : MonoBehaviour
 
     void Move()
     {
-        transform.position += movDir.normalized * speed * Time.deltaTime;
+        transform.position += movDir * speed * Time.deltaTime;
     }
 
     void Jump()
