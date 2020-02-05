@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Camera cam;
 
     // undeitable
-    float cameraRotationLimit = 0.5f;
+    float cameraRotationLimit = 0.7f;
     Rigidbody rb;
     bool isOnTheGround;
     float h;
@@ -41,9 +41,7 @@ public class PlayerController : MonoBehaviour
 
         this.transform.localRotation *= Quaternion.Euler(0, yRot * rotSpeed, 0);
 
-        // Issue: If you turn the camera too much up, view is upside down vertically.
-        cam.transform.localRotation *= Quaternion.Euler(-xRot * rotSpeed, 0, 0);
-        /*
+        // Issue: If you turn the camera too much up or down, view is vibrating.
         if(-cameraRotationLimit <= cam.transform.localRotation.x && cam.transform.localRotation.x <= cameraRotationLimit)
         {
             cam.transform.localRotation *= Quaternion.Euler(-xRot * rotSpeed, 0, 0);
@@ -52,14 +50,14 @@ public class PlayerController : MonoBehaviour
         {
             if(cam.transform.localRotation.x < -cameraRotationLimit)
             {
-                cam.transform.localRotation = Quaternion.Euler(cameraRotationLimit, 0, 0);
+                cam.transform.localRotation *= Quaternion.Euler(cameraRotationLimit, 0, 0);
             }
             else if(cam.transform.localRotation.x > cameraRotationLimit)
             {
-                cam.transform.localRotation = Quaternion.Euler(cameraRotationLimit, 0, 0);
+                cam.transform.localRotation *= Quaternion.Euler(-cameraRotationLimit, 0, 0);
             }
         }
-        */
+        
     }
 
     void MoveControl()
