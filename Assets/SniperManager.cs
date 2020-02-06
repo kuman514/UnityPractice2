@@ -46,7 +46,7 @@ public class SniperManager : MonoBehaviour
     void Update()
     {
         // processing =============================================
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         //if(Input.GetMouseButtonDown(0))
         {
             // don't fire until fully reloaded

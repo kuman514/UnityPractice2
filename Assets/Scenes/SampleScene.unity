@@ -412,11 +412,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: AKM Sniper
-  ammoPerMag: 1
-  currentAmmo: 1
+  ammoPerMag: 5
+  currentAmmo: 5
   totalAmmo: 200
   shootRange: 100
-  fireRate: 1
+  fireRate: 1.5
   reloadTime: 4
   shootPoint: {fileID: 1218953945}
   ammoUI: {fileID: 880794936}
