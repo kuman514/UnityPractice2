@@ -36,15 +36,15 @@ public class PlayerController : MonoBehaviour
 
     void RotationControl()
     {
-        float yRot = Input.GetAxisRaw("Mouse X");
-        float xRot = Input.GetAxisRaw("Mouse Y");
+        float yRot = Input.GetAxisRaw("Mouse X") * rotSpeed;
+        float xRot = Input.GetAxisRaw("Mouse Y") * rotSpeed;
 
-        this.transform.localRotation *= Quaternion.Euler(0, yRot * rotSpeed, 0);
+        this.transform.localRotation *= Quaternion.Euler(0, yRot, 0);
 
         // Issue: If you turn the camera too much up or down, view is vibrating.
-        if(-cameraRotationLimit <= cam.transform.localRotation.x && cam.transform.localRotation.x <= cameraRotationLimit)
+        if (-cameraRotationLimit <= cam.transform.localRotation.x && cam.transform.localRotation.x <= cameraRotationLimit)
         {
-            cam.transform.localRotation *= Quaternion.Euler(-xRot * rotSpeed, 0, 0);
+            cam.transform.localRotation *= Quaternion.Euler(-xRot, 0, 0);
         }
         else
         {
@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
                 cam.transform.localRotation *= Quaternion.Euler(-cameraRotationLimit, 0, 0);
             }
         }
-        
     }
 
     void MoveControl()

@@ -18,13 +18,14 @@ public class WeaponManager : MonoBehaviour
     private float fireTimer;
     private float reloading;
     private Animator anim;
-    private AudioSource weaponSound;
 
     // reference
     public Transform shootPoint;
     public Text ammoUI;
+    public AudioSource weaponSound;
     public AudioClip fireSE;
     public AudioClip reloadSE;
+    public GameObject hitHolePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,6 @@ public class WeaponManager : MonoBehaviour
         reloading = reloadTime;
         currentAmmo = ammoPerMag;
         anim = GetComponent<Animator>();
-        weaponSound = GetComponent<AudioSource>();
         SetAmmoText();
     }
 
@@ -100,6 +100,10 @@ public class WeaponManager : MonoBehaviour
             {
                 // if hit
                 Debug.Log(weaponName + " hit / Remaining ammo: " + currentAmmo + "/" + ammoPerMag);
+
+                // marking bullets by using prefab
+                GameObject hitHole = Instantiate(hitHolePrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
+                Destroy(hitHole, 5f); // Destroying automatically
             }
             else
             {

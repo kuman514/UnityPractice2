@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\WeaponManager.cs" />
+    <Compile Include="Assets\WeaponSway.cs" />
     <None Include="Assets\Weapons\AKM\Credits.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Unity/UnityProjects/UnityPractice2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
