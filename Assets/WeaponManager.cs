@@ -18,6 +18,8 @@ public class WeaponManager : MonoBehaviour
     private float fireTimer;
     private float reloading;
     private Animator anim;
+    private Vector3 originalPosition;
+    private bool isAiming;
 
     // reference
     public Transform shootPoint;
@@ -26,6 +28,9 @@ public class WeaponManager : MonoBehaviour
     public AudioClip fireSE;
     public AudioClip reloadSE;
     public GameObject hitHolePrefab;
+    public Camera cam;
+    public Vector3 recoilKickback;
+    public Vector3 aimPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +40,7 @@ public class WeaponManager : MonoBehaviour
         currentAmmo = ammoPerMag;
         anim = GetComponent<Animator>();
         SetAmmoText();
+        originalPosition = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -82,6 +88,9 @@ public class WeaponManager : MonoBehaviour
                 currentAmmo = ammoPerMag;
             }
         }
+
+        AimDownSights();
+        //RecoilBack();
         // end of processing ======================================
 
         // UI drawing =============================================
@@ -125,6 +134,22 @@ public class WeaponManager : MonoBehaviour
             weaponSound.PlayOneShot(reloadSE);
             anim.CrossFadeInFixedTime("Reload", reloadTime);
             reloading = 0.0f;
+        }
+    }
+
+    private void AimDownSights()
+    {
+        if (Input.GetButton("Fire2") && reloading >= reloadTime)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, aimPosition, Time.deltaTime * 8f);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 40f, Time.deltaTime * 8f);
+            isAiming = true;
+        }
+        else
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * 5f);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, Time.deltaTime * 8f);
+            isAiming = false;
         }
     }
 

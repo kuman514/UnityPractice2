@@ -1012,7 +1012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1e8dbbb77558c814e8177aeb01a8458a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1e8dbbb77558c814e8177aeb01a8458a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1113,6 +1113,7 @@ MonoBehaviour:
   shootRange: 50
   fireRate: 0.1
   reloadTime: 4
+  recoilAmount: 4
   shootPoint: {fileID: 1218953945}
   ammoUI: {fileID: 880794936}
   weaponSound: {fileID: 534669906}
@@ -1120,6 +1121,9 @@ MonoBehaviour:
   reloadSE: {fileID: 8300000, guid: f0b0dfbf541d5f844ba182ce791fc572, type: 3}
   hitHolePrefab: {fileID: 1359713387641359190, guid: b256c8073c7cf3847862f7fc11413588,
     type: 3}
+  cam: {fileID: 534669904}
+  recoilKickback: {x: 0, y: 0, z: 0}
+  aimPosition: {x: -0.08, y: 0.025, z: 0}
 --- !u!1 &932295748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,7 +1430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1e8dbbb77558c814e8177aeb01a8458a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1e8dbbb77558c814e8177aeb01a8458a, type: 3}
       propertyPath: m_LocalPosition.x
