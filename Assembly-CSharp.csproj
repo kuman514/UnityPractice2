@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\PlayerController.cs" />
+    <Compile Include="Assets\SniperManager.cs" />
     <Compile Include="Assets\WeaponManager.cs" />
     <Compile Include="Assets\WeaponSway.cs" />
     <None Include="Assets\Weapons\AKM\Credits.txt" />
