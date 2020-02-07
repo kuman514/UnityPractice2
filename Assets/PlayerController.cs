@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey("w"))
         {
             // Accerlate
             movSpeed = 2 * tmpMovSpd;

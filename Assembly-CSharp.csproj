@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HealthManager.cs" />
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\SniperManager.cs" />
     <Compile Include="Assets\WeaponManager.cs" />

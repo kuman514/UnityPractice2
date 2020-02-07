@@ -13,6 +13,11 @@ public class WeaponManager : MonoBehaviour
     public float shootRange;
     public float fireRate;
     public float reloadTime;
+    public float maxScatter;
+    public float scatterIncreasePerRound;
+    public float scatterReduction;
+    public float damagePerRound;
+    public float knockbackPerRound;
 
     // uneditable
     private float fireTimer;
@@ -20,6 +25,8 @@ public class WeaponManager : MonoBehaviour
     private Animator anim;
     private Vector3 originalPosition;
     private bool isAiming;
+    private float fov;
+    private float curScatter;
 
     // reference
     public Transform shootPoint;
@@ -31,6 +38,8 @@ public class WeaponManager : MonoBehaviour
     public Camera cam;
     public Vector3 recoilKickback;
     public Vector3 aimPosition;
+    public Transform casingExit;
+    public GameObject bulletCasing;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +50,8 @@ public class WeaponManager : MonoBehaviour
         anim = GetComponent<Animator>();
         SetAmmoText();
         originalPosition = transform.localPosition;
+        fov = cam.fieldOfView;
+        curScatter = 0.0f;
     }
 
     // Update is called once per frame
@@ -84,13 +95,13 @@ public class WeaponManager : MonoBehaviour
             // fully reloaded
             if (reloading >= reloadTime)
             {
-                totalAmmo -= ammoPerMag;
+                totalAmmo -= (ammoPerMag - currentAmmo);
                 currentAmmo = ammoPerMag;
             }
         }
 
+        ReduceScatter();
         AimDownSights();
-        //RecoilBack();
         // end of processing ======================================
 
         // UI drawing =============================================
@@ -105,14 +116,31 @@ public class WeaponManager : MonoBehaviour
             currentAmmo--;
 
             RaycastHit hit;
-            if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward, out hit, shootRange))
+            if(Physics.Raycast(shootPoint.position, shootPoint.transform.forward + Random.onUnitSphere * curScatter, out hit, shootRange))
             {
                 // if hit
                 Debug.Log(weaponName + " hit / Remaining ammo: " + currentAmmo + "/" + ammoPerMag);
 
                 // marking bullets by using prefab
                 GameObject hitHole = Instantiate(hitHolePrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-                Destroy(hitHole, 5f); // Destroying automatically
+                hitHole.transform.SetParent(hit.transform);
+                Destroy(hitHole, 5f);
+
+                // knockback needs hit hole not to have a Mesh Collider
+                // each hit hole needs their own mesh collider removed
+                Rigidbody rigidbody = hit.transform.GetComponent<Rigidbody>();
+                if(rigidbody != null)
+                {
+                    rigidbody.AddForceAtPosition(transform.forward * 5f * knockbackPerRound, transform.position);
+                }
+
+                // hit HP reduction does so
+                // each hit hole needs their own mesh collider removed
+                HealthManager hitObjHP = hit.transform.GetComponent<HealthManager>();
+                if(hitObjHP != null)
+                {
+                    hitObjHP.Damage(damagePerRound);
+                }
             }
             else
             {
@@ -122,6 +150,8 @@ public class WeaponManager : MonoBehaviour
 
             anim.CrossFadeInFixedTime("Fire", fireRate);
             weaponSound.PlayOneShot(fireSE);
+            CasingExitEffect();
+            IncreaseScatter();
 
             fireTimer = 0.0f;
         }
@@ -142,14 +172,47 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetButton("Fire2") && reloading >= reloadTime)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, aimPosition, Time.deltaTime * 8f);
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 40f, Time.deltaTime * 8f);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov / 2, Time.deltaTime * 8f);
             isAiming = true;
         }
         else
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * 5f);
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, Time.deltaTime * 8f);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, Time.deltaTime * 8f);
             isAiming = false;
+        }
+    }
+
+    void CasingExitEffect()
+    {
+        Quaternion randomQuaternion = new Quaternion(Random.Range(0, 360f), Random.Range(0, 360f), Random.Range(0, 360f), 1);
+        GameObject casing = Instantiate(bulletCasing, casingExit);
+        casing.transform.localRotation = randomQuaternion;
+        casing.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Random.Range(50f, 100f), Random.Range(50f, 100f), Random.Range(-30f, 30f)));
+        Destroy(casing, 1f);
+    }
+
+    void IncreaseScatter()
+    {
+        if(curScatter < maxScatter)
+        {
+            curScatter += scatterIncreasePerRound;
+        }
+        else
+        {
+            curScatter = maxScatter;
+        }
+    }
+
+    void ReduceScatter()
+    {
+        if(curScatter > 0.0f)
+        {
+            curScatter -= scatterReduction * Time.deltaTime;
+        }
+        else
+        {
+            curScatter = 0.0f;
         }
     }
 
