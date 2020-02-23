@@ -25,6 +25,7 @@ public class WeaponManager : MonoBehaviour
     private Animator anim;
     private Vector3 originalPosition;
     private bool isAiming;
+    private bool isRunning;
     private float fov;
     private float curScatter;
 
@@ -52,6 +53,7 @@ public class WeaponManager : MonoBehaviour
         originalPosition = transform.localPosition;
         fov = cam.fieldOfView;
         curScatter = 0.0f;
+        isRunning = false;
     }
 
     // Update is called once per frame
@@ -102,6 +104,7 @@ public class WeaponManager : MonoBehaviour
 
         ReduceScatter();
         AimDownSights();
+        Run();
         // end of processing ======================================
 
         // UI drawing =============================================
@@ -111,7 +114,7 @@ public class WeaponManager : MonoBehaviour
 
     void Fire()
     {
-        if(fireTimer >= fireRate && reloading >= reloadTime)
+        if(fireTimer >= fireRate && reloading >= reloadTime && !isRunning)
         {
             currentAmmo--;
 
@@ -218,7 +221,12 @@ public class WeaponManager : MonoBehaviour
 
     void Run()
     {
-        anim.CrossFadeInFixedTime("Run", reloadTime);
+        isRunning = Input.GetKey(KeyCode.LeftShift);
+
+        if(reloading >= reloadTime)
+        {
+            anim.SetBool("isRunning", isRunning);
+        }
     }
 
     void SetAmmoText()
