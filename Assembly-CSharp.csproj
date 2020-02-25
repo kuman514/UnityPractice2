@@ -69,6 +69,7 @@
     <Compile Include="Assets\WeaponManager.cs" />
     <Compile Include="Assets\WeaponSway.cs" />
     <Compile Include="Assets\WeaponSwitcher.cs" />
+    <None Include="Assets\Weapons\Glock\Credits.txt" />
     <None Include="Assets\Weapons\AKM\Credits.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/Unity/UnityProjects/UnityPractice2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
