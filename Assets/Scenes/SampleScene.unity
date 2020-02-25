@@ -558,7 +558,7 @@ MonoBehaviour:
   switchDelay: 0
   weapon:
   - {fileID: 886621608}
-  - {fileID: 0}
+  - {fileID: 992640944}
 --- !u!1 &289721033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,7 +1421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.038
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1429,7 +1429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.23
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1495,11 +1495,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 31cf602c6de04ff45ba7bb19767c2107, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
 --- !u!4 &992640943 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 992640942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &992640944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec,
     type: 3}
   m_PrefabInstance: {fileID: 992640942}
   m_PrefabAsset: {fileID: 0}
