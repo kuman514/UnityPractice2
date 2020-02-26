@@ -1390,9 +1390,9 @@ MonoBehaviour:
   shootRange: 50
   fireRate: 0.1
   reloadTime: 4
-  maxScatter: 0.04
-  scatterIncreasePerRound: 0.003
-  scatterReduction: 0.008
+  maxScatter: 0.1
+  scatterIncreasePerRound: 0.009
+  scatterReduction: 0.06
   damagePerRound: 25
   knockbackPerRound: 30
   shootPoint: {fileID: 1218953945}
@@ -1418,6 +1418,10 @@ PrefabInstance:
     - target: {fileID: 100012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
       propertyPath: m_Name
       value: Glock_rig
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: d5c2c4a36b38fc24ea5e9eeb358d71ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1513,6 +1517,43 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 992640942}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &992640945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992640944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3161da4d22b544aa31453fa9d387a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Glock
+  ammoPerMag: 17
+  currentAmmo: 17
+  totalAmmo: 1700
+  shootRange: 60
+  fireRate: 0.09
+  reloadTime: 2
+  maxScatter: 0.1
+  scatterIncreasePerRound: 0.009
+  scatterReduction: 0.06
+  damagePerRound: 15
+  knockbackPerRound: 18
+  shootPoint: {fileID: 1218953945}
+  ammoUI: {fileID: 880794936}
+  weaponSound: {fileID: 534669906}
+  fireSE: {fileID: 8300000, guid: a778147e98ae63f4ba7cf94f135fad91, type: 3}
+  reloadSE: {fileID: 8300000, guid: f0b0dfbf541d5f844ba182ce791fc572, type: 3}
+  hitHolePrefab: {fileID: 4072989075680267014, guid: 4e09d5fc949df68449c98a6b439131a8,
+    type: 3}
+  cam: {fileID: 534669904}
+  recoilKickback: {x: 0, y: 0, z: 0}
+  aimPosition: {x: -0.088, y: 0.013, z: 0}
+  casingExit: {fileID: 1266180209}
+  bulletCasing: {fileID: 6896029052985150596, guid: ce43414428dd7ee49b8e28df61eb7201,
+    type: 3}
 --- !u!1 &1218953944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,6 +1612,36 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 600326400}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1266180208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1266180209}
+  m_Layer: 0
+  m_Name: CasingExit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1266180209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266180208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.24, y: 0.52, z: 14.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 992640943}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1565433609

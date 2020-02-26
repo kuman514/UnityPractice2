@@ -66,6 +66,7 @@
     <Compile Include="Assets\HealthManager.cs" />
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\PlayerHPManager.cs" />
+    <Compile Include="Assets\SemiAutoWeaponManager.cs" />
     <Compile Include="Assets\WeaponManager.cs" />
     <Compile Include="Assets\WeaponSway.cs" />
     <Compile Include="Assets\WeaponSwitcher.cs" />
